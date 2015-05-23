@@ -88,26 +88,38 @@ function showHostOnPage(tabId, vhost){
 					window.vHostIndicator = document.createElement('DIV');
 					var indicator = window.vHostIndicator;
 					indicator.innerHTML = vhost;
-					indicator.style.display = "block";
-					indicator.style.position = "fixed";
-					indicator.style.top = "10px";
-					indicator.style.right = "10px";
-					indicator.style.zIndex = "99999999";
-					indicator.style.background = "#555";
-					indicator.style.color = "white";
-					indicator.style.padding = "10px";
-					indicator.style.borderRadius = "10px";
-					indicator.style.opacity = "0.5";
-					indicator.style.fontSize = "18px";
-					indicator.style.cursor = "default";
-					indicator.style['-webkit-user-select'] = 'none';
-					indicator.addEventListener('mouseenter', function(){
-						indicator.style.opacity = "1";
-					});
-					indicator.addEventListener('mouseleave', function(){
-						indicator.style.opacity = "0.5";
+					var root = indicator.createShadowRoot();
+					root.innerHTML = "<style>" +
+									 ":host { " +
+									 	"display: block;" +
+									 	"position: fixed;" +
+									 	"top: 10px;" +
+									 	"right: 10px;" +
+									 	"z-index: 999999999;" +
+									 	"background: #555;" +
+									 	"color: white;" +
+									 	"padding: 10px;" +
+									 	"border-radius: 10px;" +
+									 	"opacity: 0.9;" +
+									 	"font-size: 18px;" +
+									 	"font-family: Helvetica, Arial, sans-serif;" +
+									 	"-webkit-user-select: none;"+
+									 	"pointer-events: none;" +
+									 	"transition-duration: 0.1s;" +
+									 "}" +
+									 "</style>" +
+									 "<content></content>";
+					window.addEventListener('mousemove', function(e){
+						var xBound = window.innerWidth - 10 - indicator.offsetWidth;
+						var yBound = 10 + indicator.offsetHeight;
+						if (e.clientX > xBound && e.clientY < yBound){
+							indicator.style.opacity = "0.1";
+						} else {
+							indicator.style.opacity = "0.9";
+						}
 					});
 					document.body.appendChild(window.vHostIndicator);
+					console.log(indicator);
 				}
 			})();
 		}
