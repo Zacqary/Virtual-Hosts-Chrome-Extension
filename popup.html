@@ -3,28 +3,78 @@
   <head>
     <title>Request VHost</title>
     <style>
+      *{
+        box-sizing: border-box;
+      }
+      html, body{
+        width: 250px;
+      }
       body {
-		font-family: verdana, sans-serif;
-		font-size: 10pt;
+		    font-family: 'Helvetica Neue', 'Lucida Grande', sans-serif;
+		    font-size: 10pt;
         min-width: 200px;
         overflow-x: hidden;
+        padding: 0;
+        margin: 0;
       }
 
       img {
-        margin: 5px;
-        border: 2px solid black;
-        vertical-align: middle;
-        width: 75px;
-        height: 75px;
+        margin: auto;
+        border: none;
+        display: block;
+        width: 64px;
+        height: 64px;
+      }
+      h4{
+        text-align: center;
+      }
+      h4.no-host{
+        color: #888;
+      }
+      header{
+
+      }
+      button{
+        display: block;
+        background: none;
+        border: none;
+        font-size: inherit;
+        padding: 6px 10px;
+        width: 100%;
+        text-align: left;
+        height: 32px;
+        cursor: pointer;
+      }
+      button:focus{
+        outline:none;
+      }
+      button:hover{
+        background: #bbceec;
+      }
+      .bottom-line{
+        border-bottom: 1px solid #dedede;
+      }
+      .enabled {
+        color: #6694ce;
+      }
+      .enabled:before{
+        content: '\2713\a0';
+      }
+      .disabled {
+        color: #f15758;
+      }
+      .disabled:before{
+        content: '\2717\a0';
       }
     </style>
+    <script src="globals.js"></script>
     <script src="popup.js"></script>
   </head>
   <body>
-  IP:<br>
-  <input type="text" id="ip_address" placeholder="127.0.0.1" name="ip"><br>
-	VHostname:<br>
-	<input type="text" id="vhost_name" placeholder="dev.yourhost.com" name="vhost"><br>
-	Enable: <input type="checkbox" id="vhost_enable">
+    <h4 class="no-host">No vHost active on this tab</h4>
+    <button id="site-enable-btn"><span class='enabled'>Enabled</span> on this site</button>
+    <button id="show-hostname-btn"><span class='enabled'>Show</span> hostname in corner</button>
+    <button class='bottom-line' id="show-number-btn"><span class='disabled'>Hide</span> number in icon</button>
+    <button id="config-btn">Configure...</button>
   </body>
 </html>
